@@ -22,6 +22,7 @@ pkill dhcpd
 mkdir -p tmp
 touch tmp/leases_dhcp
 touch tmp/dhcpd.pid
+rm tmp/leases_dhcp~ 
 
 echo 'default-lease-time 600;
 max-lease-time 7200;
@@ -43,10 +44,11 @@ subnet 10.0.0.0 netmask 255.255.255.0 {
 chown root:root dhcpd.conf
 chown root:root -R tmp
 
-
-
-systemctl stop apparmor.service
-cp /etc/apparmor.d/usr.sbin.dhcpd /etc/apparmor.d/disable/
-systemctl restart apparmor.service
-sudo aa-remove-unknown
-systemctl stop apparmor.service
+echo "Les instruction pour désactivée apparmor sont les suivantes:"
+echo "systemctl stop apparmor.service"
+echo "cp /etc/apparmor.d/usr.sbin.dhcpd /etc/apparmor.d/disable/"
+echo "systemctl restart apparmor.service"
+echo "sudo aa-remove-unknown"
+echo "systemctl stop apparmor.service"
+echo
+echo "ATTENTION: Il ne faut le faire qu'une seule fois !!!!!"
