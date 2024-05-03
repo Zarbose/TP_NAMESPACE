@@ -16,11 +16,14 @@ ip addr add 10.0.0.2/24 dev vhost
 # Démarage du serveur dhcp
 /sbin/dhcpd -lf $PWD/tmp/leases_dhcp -pf $PWD/tmp/dhcpd.pid -cf $PWD/dhcpd.conf vhost
 
+# sleep 1
+
 # Lancemenet du namespace user
-./user.sh &
+unshare --user --net --uts --map-root-user bash ./user.sh &
 
 # Récupération du pid du namespace user
 user_pid=$!
+echo "user_pid: $user_pid"
 
 # Envoyer l'interface virtuelle vmain dans le namespace user
 ip link set vmain netns $user_pid
