@@ -1,6 +1,10 @@
 #!/bin/bash
-
 ## Création du namespace racine
+
+if [[ $EUID -ne 0 ]]; then
+    echo "This script must be run as root"
+    exit 1
+fi
 
 # Création des interfcaes virtuelles entre le namespace racine et le premier namespace user
 ip link add vhost type veth peer name vmain
