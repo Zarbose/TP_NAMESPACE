@@ -53,11 +53,11 @@ echo "systemctl stop apparmor.service"
 echo
 echo "ATTENTION: Il ne faut le faire qu'une seule fois !!!!!"
 
+chmod +x deploy_containers.sh
+chmod +x deploy_orchestrator.sh
+chmod +x echo_pid.sh
 
 cd containers
 chmod u+x build_lighttpd.sh
 sudo ./build_lighttpd.sh
 
-chmod +x deploy_containers.sh
-chmod +x deploy_orchestrator.sh
-chmod +x echo_pid.sh

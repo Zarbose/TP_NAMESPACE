@@ -5,6 +5,10 @@
 # 4. Configuration de l'interface virtuelle (dhclient)
 # 5. Lancemenet du serveur lighttpd avec chroot
 
+if [[ $EUID -ne 0 ]]; then
+    echo "This script must be run as root"
+    exit 1
+fi
 
 ### 1 ###
 rm /tmp/pid
