@@ -2,22 +2,9 @@
 
 ## Préparation de l'environnement
 
-rm README.md
-rm TOUT.md
-
 if [[ $EUID -ne 0 ]]; then
     echo "This script must be run as root"
     exit 1
-fi
-
-if ! dpkg -s isc-dhcp-server >/dev/null 2>&1; then
-    echo "isc-dhcp-server is not installed"
-    read -p "Do you want to install isc-dhcp-server? (y/n): " choice
-    if [[ $choice == "y" ]]; then
-        apt-get install isc-dhcp-server
-    else
-        exit 1
-    fi
 fi
 
 if ! command -v dhcpd >/dev/null 2>&1; then
@@ -65,3 +52,12 @@ echo "sudo aa-remove-unknown"
 echo "systemctl stop apparmor.service"
 echo
 echo "ATTENTION: Il ne faut le faire qu'une seule fois !!!!!"
+
+
+cd containers
+chmod u+x build_lighttpd.sh
+sudo ./build_lighttpd.sh
+
+chmod +x deploy_containers.sh
+chmod +x deploy_orchestrator.sh
+chmod +x echo_pid.sh
