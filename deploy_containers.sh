@@ -7,6 +7,7 @@
 
 
 ### 1 ###
+rm /tmp/pid
 unshare --user --net --uts --map-root-user bash ./echo_pid.sh &
 
 while [ ! -f /tmp/pid ]; do
@@ -20,7 +21,7 @@ ip link add vguest_1 link vmain type macvlan mode bridge
 ip link set vguest_1 netns $pid
 
 ### 3 ###
-nsenter -t $pid --net --user --uts --preserve-credential dhclient vguest_1
+nsenter -t $pid --net --user --uts --preserve-credential dhclient -4 -1 vguest_1
 
 
 ### 4 ###

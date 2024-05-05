@@ -2,4 +2,4 @@
 
 ip l set vmain up
 
-dhclient -q -1 vmain
+dhclient -q -4 -1 vmain

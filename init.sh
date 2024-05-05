@@ -54,7 +54,7 @@ subnet 10.0.0.0 netmask 255.255.255.0 {
     }
 }' > dhcpd/dhcpd.conf
 
-chown root:root dhcpd.conf
+chown root:root dhcpd/dhcpd.conf
 chown root:root -R dhcpd
 
 echo "-------------- Les instruction pour désactivée apparmor sont les suivantes --------------"
