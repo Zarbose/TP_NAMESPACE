@@ -33,4 +33,4 @@ ip link set vmain netns $pid
 
 
 
-# nsenter -t $pid --net --user --uts --preserve-credential bash ./deploy_containers.sh $pid
+nsenter -t $pid --net --user --uts --preserve-credential bash ./configure_interface.sh
