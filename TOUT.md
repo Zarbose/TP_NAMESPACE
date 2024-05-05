@@ -1,3 +1,6 @@
+### Ne pas lire c'est un mémo ###
+
+
 ##### ÉTAPE 1 #####
 
 pkill dhcpd
