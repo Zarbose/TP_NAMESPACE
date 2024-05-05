@@ -14,7 +14,7 @@ ip l set vhost up
 ip addr add 10.0.0.2/24 dev vhost
 
 # Démarage du serveur dhcp
-/sbin/dhcpd -lf $PWD/tmp/leases_dhcp -pf $PWD/tmp/dhcpd.pid -cf $PWD/dhcpd.conf vhost
+/sbin/dhcpd -q-lf $PWD/tmp/leases_dhcp -pf $PWD/tmp/dhcpd.pid -cf $PWD/dhcpd.conf vhost 2>&1 /dev/null
 
 rm /tmp/pid
 
