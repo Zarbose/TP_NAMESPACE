@@ -31,6 +31,4 @@ echo "pid: $pid"
 # Envoyer l'interface virtuelle vmain dans le namespace user
 ip link set vmain netns $pid
 
-
-
 nsenter -t $pid --net --user --uts --preserve-credential bash ./configure_interface.sh

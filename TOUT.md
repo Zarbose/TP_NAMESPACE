@@ -41,17 +41,18 @@ ip addr add 10.0.0.10/24 dev vmain
 ip l set vmain up
 
 
-
-
-
 ##### ÉTAPE 2 #####
+<!-- ip l set vguest1 nets PID
+nsenter -t PID --net --user --uts --preserve-credential bash -->
 
 
+# Creer l'interface vguest_n
+ip link add vguest_1 link vmain type macvlan mode bridge
+ip link set vguest_1 netns <PID>
 
-
-ip l set vguest1 nets PID
 # DANS CHROOT
-ip l set vguest1 up
-dhclient -4 -v vguest1
+<!-- ip l set vguest_1 up -->
+# Il faut adapter le cript /usr/sbin/dhclient-script pour l'utiliser sans root
+dhclient -4 -v vguest_1
 
-nsenter -t PID --net --user --uts --preserve-credential bash
+
