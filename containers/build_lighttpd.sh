@@ -1,7 +1,10 @@
 #!/bin/bash -u 
 
+sudo pkill lighttpd
+sudo systemctl stop lighttpd
+
 # User variables
-ENV="newroot"
+ENV="lighttpd_container"
 DIR_TO_IMPORT="to_import"
 SHELL_TO_IMPORT=(/bin/bash /usr/bin/bash)
 COMMANDS_TO_IMPORT=( id ls whoami hostname curl lighttpd )

@@ -53,6 +53,6 @@ ip link set vguest_1 netns <PID>
 # DANS CHROOT
 <!-- ip l set vguest_1 up -->
 # Il faut adapter le cript /usr/sbin/dhclient-script pour l'utiliser sans root
-dhclient -4 -v vguest_1
+dhclient -4 -1 -v vguest_1
 
 

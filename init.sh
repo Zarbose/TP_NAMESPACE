@@ -2,6 +2,9 @@
 
 ## Préparation de l'environnement
 
+rm README.md
+rm TOUT.md
+
 if [[ $EUID -ne 0 ]]; then
     echo "This script must be run as root"
     exit 1
@@ -17,12 +20,22 @@ if ! dpkg -s isc-dhcp-server >/dev/null 2>&1; then
     fi
 fi
 
+if ! command -v dhcpd >/dev/null 2>&1; then
+    echo "dhcpd is not installed"
+    read -p "Do you want to install dhcpd? (y/n): " choice
+    if [[ $choice == "y" ]]; then
+        apt-get install dhcpd
+    else
+        exit 1
+    fi
+fi
+
 pkill dhcpd
 
-mkdir -p tmp
-touch tmp/leases_dhcp
-touch tmp/dhcpd.pid
-rm tmp/leases_dhcp~ 
+mkdir -p dhcpd
+touch dhcpd/leases_dhcp
+touch dhcpd/dhcpd.pid
+rm dhcpd/leases_dhcp~ 
 
 echo 'default-lease-time 600;
 max-lease-time 7200;
@@ -39,12 +52,12 @@ subnet 10.0.0.0 netmask 255.255.255.0 {
     pool {
         range 10.0.0.10 10.0.0.100;
     }
-}' > dhcpd.conf
+}' > dhcpd/dhcpd.conf
 
 chown root:root dhcpd.conf
-chown root:root -R tmp
+chown root:root -R dhcpd
 
-echo "Les instruction pour désactivée apparmor sont les suivantes:"
+echo "-------------- Les instruction pour désactivée apparmor sont les suivantes --------------"
 echo "systemctl stop apparmor.service"
 echo "cp /etc/apparmor.d/usr.sbin.dhcpd /etc/apparmor.d/disable/"
 echo "systemctl restart apparmor.service"
