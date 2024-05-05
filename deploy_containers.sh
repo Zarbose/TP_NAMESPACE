@@ -1,9 +1,7 @@
 #!/bin/bash
 
-sleep 2
-
 ip l set vmain up
 
-dhclient -1
+dhclient -1 -v vmain
 
 sleep infinity
