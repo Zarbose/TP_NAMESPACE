@@ -19,10 +19,10 @@ fi
 
 pkill dhcpd
 
-mkdir -p dhcpd
-touch dhcpd/leases_dhcp
-touch dhcpd/dhcpd.pid
-rm dhcpd/leases_dhcp~ 
+mkdir -p dhcpd_0
+touch dhcpd_0/leases_dhcp
+touch dhcpd_0/dhcpd.pid
+rm dhcpd_0/leases_dhcp~ 
 
 echo 'default-lease-time 600;
 max-lease-time 7200;
@@ -56,6 +56,9 @@ echo "ATTENTION: Il ne faut le faire qu'une seule fois !!!!!"
 chmod +x deploy_containers.sh
 chmod +x deploy_orchestrator.sh
 chmod +x echo_pid.sh
+
+echo 1 > /tmp/cpt
+chmomd 777 /tmp/cpt
 
 cd containers
 # chmod u+x build_lighttpd.sh

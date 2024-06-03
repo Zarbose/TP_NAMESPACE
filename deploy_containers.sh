@@ -27,6 +27,5 @@ ip link set vguest_1 netns $pid
 ### 3 ###
 nsenter -t $pid --net --user --uts --preserve-credential dhclient -4 -1 vguest_1
 
-
 ### 4 ###
-nsenter -t $pid --net --user --uts --preserve-credential chroot containers/lighttpd_container/ bash -c 'lighttpd -f /etc/lighttpd/lighttpd.conf'
+nsenter -t $pid --net --user --uts --preserve-credential chroot containers/bash_container/ bash -c 'while :;do :;done' &
