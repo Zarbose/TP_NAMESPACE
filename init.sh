@@ -58,6 +58,10 @@ chmod +x deploy_orchestrator.sh
 chmod +x echo_pid.sh
 
 cd containers
-chmod u+x build_lighttpd.sh
-sudo ./build_lighttpd.sh
+# chmod u+x build_lighttpd.sh
+# sudo ./build_lighttpd.sh
+
+
+chmod u+x build_bash.sh
+sudo ./build_bash.sh
 
