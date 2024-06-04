@@ -19,30 +19,30 @@ fi
 
 pkill dhcpd
 
-mkdir -p dhcpd_0
-touch dhcpd_0/leases_dhcp
-touch dhcpd_0/dhcpd.pid
-rm dhcpd_0/leases_dhcp~ 
+# mkdir -p dhcpd_0
+# touch dhcpd_0/leases_dhcp
+# touch dhcpd_0/dhcpd.pid
+# rm dhcpd_0/leases_dhcp~ 
 
-echo 'default-lease-time 600;
-max-lease-time 7200;
-ddns-update-style none;
+# echo 'default-lease-time 600;
+# max-lease-time 7200;
+# ddns-update-style none;
 
-subnet 10.0.0.0 netmask 255.255.255.0 {
+# subnet 10.0.0.0 netmask 255.255.255.0 {
     
-    option domain-name-servers 1.1.1.1;
-    option domain-name "upjv.lan";
-    option subnet-mask 255.255.255.0;
-    option routers 10.0.0.1;
-    option broadcast-address 10.0.0.255;
+#     option domain-name-servers 1.1.1.1;
+#     option domain-name "upjv.lan";
+#     option subnet-mask 255.255.255.0;
+#     option routers 10.0.0.1;
+#     option broadcast-address 10.0.0.255;
     
-    pool {
-        range 10.0.0.10 10.0.0.100;
-    }
-}' > dhcpd/dhcpd.conf
+#     pool {
+#         range 10.0.0.10 10.0.0.100;
+#     }
+# }' > dhcpd/dhcpd.conf
 
-chown root:root dhcpd/dhcpd.conf
-chown root:root -R dhcpd
+# chown root:root dhcpd/dhcpd.conf
+# chown root:root -R dhcpd
 
 echo "-------------- Les instruction pour désactivée apparmor sont les suivantes --------------"
 echo "systemctl stop apparmor.service"

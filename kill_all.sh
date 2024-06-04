@@ -8,8 +8,13 @@ sudo kill -9 $(ps aux | grep '/sbin/dhcpd' | tr -s ' ' | cut -d ' ' -f 2)
 rm -rf dhcpd_*
 
 number=$(cat /tmp/cpt)
+number2=$(cat /tmp/orchestrator_$number/cpt)
 for ((i=1; i<=$number; i++)); do
-    sur rm -rf /sys/fs/cgroup/orchestrator_$i
+    for ((j=1; j<=$number2; j++)); do
+        sudo rmdir /sys/fs/cgroup/orchestrator_$i/app_$j
+    done
+    sudo rmdir /sys/fs/cgroup/orchestrator_$i
+    sudo rm -rf /tmp/orchestrator_$i
 done
 
 echo "0" > /tmp/cpt

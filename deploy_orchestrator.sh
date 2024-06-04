@@ -71,15 +71,20 @@ nsenter -t $pid --net --user --uts --preserve-credential bash -c "dhclient -4 -1
 
 
 ## Création control groupe
-echo "Control group..."
+echo "Control group -> orchestrator_$number"
 moncgroup="orchestrator_$number"
 mkdir /sys/fs/cgroup/$moncgroup
 echo $pid > /sys/fs/cgroup/$moncgroup/cgroup.procs
 echo +cpu > /sys/fs/cgroup/$moncgroup/cgroup.subtree_control
 
-for ((i=0; i<$number; i++)); do
+mkdir /tmp/$moncgroup/
+echo "0" > /tmp/$moncgroup/cpt
+
+for ((i=1; i<=$number; i++)); do
     echo 1000 $number"0000" > /sys/fs/cgroup/orchestrator_$i/cpu.max
 done
+
+
 
 # cat /proc/self/cgroup
 # cat /sys/fs/cgroup/moncgroup/cgroup.procs
